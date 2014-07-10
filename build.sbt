@@ -8,8 +8,6 @@ scalaVersion := "2.9.1"
 
 sbtPlugin := true
 
-CrossBuilding.crossSbtVersions := Seq("0.11.2", "0.11.3")
-
 libraryDependencies += "org.glassfish.ha" % "ha-api" % "3.1.8" artifacts( 
   Artifact("ha-api", "jar", "jar") 
 ) 
@@ -19,10 +17,6 @@ libraryDependencies += "com.sun.xml.ws" % "jaxws-tools" % "2.2.7-promoted-b24"
 publishMavenStyle := true
 
 publishArtifact in Test := false
-
-publishTo <<= isSnapshot(
-  if (_) Some("snapshots" at "https://oss.sonatype.org/content/repositories/snapshots/") 
-  else   Some("releases" at "https://oss.sonatype.org/service/local/staging/deploy/maven2/"))
 
 pomExtra := {
     <inceptionYear>2012</inceptionYear>
