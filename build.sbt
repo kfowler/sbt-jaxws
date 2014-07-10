@@ -47,6 +47,3 @@ pomExtra := {
     </developers>
   }
 
-EclipseKeys.withSource := true
-
-EclipseKeys.eclipseOutput := Some("bin")
