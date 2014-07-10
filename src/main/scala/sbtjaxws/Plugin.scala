@@ -65,7 +65,7 @@ object Plugin extends sbt.Plugin {
       if (result != 0)
         throw new RuntimeException("Problem running wsimport")
     } catch {
-      case t =>
+      case t: Exception =>
         streams.log.error("Problem running wsimport " + args.mkString(" "))
         throw t
     }

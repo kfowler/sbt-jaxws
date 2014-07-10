@@ -2,9 +2,11 @@ name := "sbt-jaxws"
 
 organization := "com.github.mdr"
 
-version := "0.0.1-SNAPSHOT"
+version := "0.1-SNAPSHOT"
 
-scalaVersion := "2.9.1"
+scalaVersion := "2.10.4"
+
+scalacOptions ++= Seq("-Xfatal-warnings", "-feature", "-Xlint")
 
 sbtPlugin := true
 
