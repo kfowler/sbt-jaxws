@@ -2,22 +2,18 @@ The sbt equivalent of the [JAX-WS Maven plug-in][1]. It's a bit of a poor relati
 
 You should also consider using [scalaxb][2].
 
-Compatible with sbt 0.11.2 or 0.11.3.
+Compatible with sbt 0.12.x and 0.13.x.
 
 Configuration
 -------------
 
 Put this in your `project/plugins.sbt`:
 
-    libraryDependencies += "org.glassfish.ha" % "ha-api" % "3.1.8" artifacts(
-      Artifact("ha-api", "jar", "jar")
-    )
-
-    addSbtPlugin("com.github.mdr" % "sbt-jaxws" % "0.0.1")
+    addSbtPlugin("net.koofr.mdr" % "sbt-jaxws" % "0.1")
 
 Light configuration example (in `build.sbt`):
 
-    seq(sbtJaxWsSettings : _*)
+    sbtJaxWsSettings 
 
     SbtJaxWsKeys.wsdlFiles <+= baseDirectory(_ / "service.wsdl")
 
