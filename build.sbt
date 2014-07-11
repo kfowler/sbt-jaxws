@@ -1,8 +1,8 @@
 name := "sbt-jaxws"
 
-organization := "com.github.mdr"
+organization := "net.koofr"
 
-version := "0.1-SNAPSHOT"
+version := "0.1"
 
 sbtPlugin := true
 
@@ -20,9 +20,15 @@ publishMavenStyle := true
 
 publishArtifact in Test := false
 
+publishTo <<= isSnapshot { isSnapshot =>
+  val nexus = "https://oss.sonatype.org/"
+  if (isSnapshot) Some("snapshots" at nexus + "content/repositories/snapshots")
+  else            Some("releases"  at nexus + "service/local/staging/deploy/maven2")
+}
+
 pomExtra := {
     <inceptionYear>2012</inceptionYear>
-    <url>http://github.com/mdr/sbt-jaxws</url>
+    <url>http://github.com/koofr/sbt-jaxws</url>
     <licenses>
       <license>
         <name>MIT License</name>
@@ -31,14 +37,19 @@ pomExtra := {
       </license>
     </licenses>
     <scm>
-      <url>git@github.com:mdr/sbt-jaxws.git</url>
-      <connection>scm:git:git@github.com:mdr/sbt-jaxws</connection>
+      <url>git@github.com:koofr/sbt-jaxws.git</url>
+      <connection>scm:git:git@github.com:koofr/sbt-jaxws</connection>
     </scm>
     <developers>
       <developer>
         <id>mdr</id>
         <name>Matt Russell</name>
         <url>https://github.com/mdr/</url>
+      </developer>
+      <developer>
+        <id>edofic</id>
+        <name>Andraz Bajt</name>
+        <url>https://github.com/edofic</url>
       </developer>
     </developers>
   }
