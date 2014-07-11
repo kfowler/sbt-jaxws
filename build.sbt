@@ -4,11 +4,11 @@ organization := "com.github.mdr"
 
 version := "0.1-SNAPSHOT"
 
-scalaVersion := "2.10.4"
-
-scalacOptions ++= Seq("-Xfatal-warnings", "-feature", "-Xlint")
-
 sbtPlugin := true
+
+crossBuildingSettings
+
+CrossBuilding.crossSbtVersions := Seq("0.12", "0.13")
 
 libraryDependencies += "org.glassfish.ha" % "ha-api" % "3.1.8" artifacts( 
   Artifact("ha-api", "jar", "jar") 
