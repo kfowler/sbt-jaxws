@@ -9,11 +9,11 @@ Configuration
 
 Put this in your `project/plugins.sbt`:
 
-    addSbtPlugin("net.koofr.mdr" % "sbt-jaxws" % "0.1")
+    addSbtPlugin("net.koofr" % "sbt-jaxws" % "0.1")
 
 Light configuration example (in `build.sbt`):
 
-    sbtJaxWsSettings 
+    sbtJaxWsSettings
 
     SbtJaxWsKeys.wsdlFiles <+= baseDirectory(_ / "service.wsdl")
 
@@ -32,7 +32,7 @@ Full configuration example:
              SbtJaxWsKeys.targetVersion := "2.1"))
     }
 
-There is an `SbtJaxWsKeys.otherArgs` for other `wsimport` arguments -- if you use this, 
+There is an `SbtJaxWsKeys.otherArgs` for other `wsimport` arguments -- if you use this,
 please consider adding a new setting to the plug-in and sending a pull request ;-)
 
   [1]: http://jax-ws-commons.java.net/jaxws-maven-plugin/
