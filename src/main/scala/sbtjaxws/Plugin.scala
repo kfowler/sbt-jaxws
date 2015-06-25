@@ -1,8 +1,8 @@
 package sbtjaxws
 
-import sbt._
-import sbt.Keys._
 import com.sun.tools.ws.WsImport
+import sbt.Keys._
+import sbt._
 
 object Plugin extends sbt.Plugin {
 
@@ -53,21 +53,37 @@ object Plugin extends sbt.Plugin {
       Seq(wsdlFile.getAbsolutePath)
 
   private def runWsImport(streams: TaskStreams, wsdlFile: File, settings: WsImportSettings): Seq[File] = {
-    streams.log.info("Generating Java from " + wsdlFile)
 
-    streams.log.debug("Creating dir " + settings.dest)
-    settings.dest.mkdirs()
+    val sources = Seq(wsdlFile) ++ settings.bindings
+    val generated = (settings.dest ** "*.java").get
 
-    val args = makeArgs(wsdlFile, settings)
-    streams.log.debug("wsimport " + args.mkString(" "))
-    try {
-      val result = WsImport.doMain(args.toArray)
-      if (result != 0)
-        throw new RuntimeException("Problem running wsimport")
-    } catch {
-      case t: Exception =>
-        streams.log.error("Problem running wsimport " + args.mkString(" "))
-        throw t
+    val upToDate = (sources, generated) match {
+      case (Seq(), _)  => true
+      case (_, Seq())  => false
+      case (ins, outs) =>
+        val inLastModified = ins.map(_.lastModified()).max
+        val outLastModified = outs.map(_.lastModified()).min
+        inLastModified < outLastModified
+    }
+
+    if (upToDate) {
+      streams.log.info("Generated sources are up to date for " + wsdlFile)
+    } else {
+      streams.log.info("Generating Java from " + wsdlFile)
+      streams.log.debug("Creating dir " + settings.dest)
+      settings.dest.mkdirs()
+
+      val args = makeArgs(wsdlFile, settings)
+      streams.log.debug("wsimport " + args.mkString(" "))
+      try {
+        val result = WsImport.doMain(args.toArray)
+        if (result != 0)
+          throw new RuntimeException("Problem running wsimport")
+      } catch {
+        case t: Exception =>
+          streams.log.error("Problem running wsimport " + args.mkString(" "))
+          throw t
+      }
     }
     (settings.dest ** "*.java").get
   }
