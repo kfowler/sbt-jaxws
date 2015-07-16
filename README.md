@@ -9,7 +9,7 @@ Configuration
 
 Put this in your `project/plugins.sbt`:
 
-    addSbtPlugin("net.koofr" % "sbt-jaxws" % "0.1")
+    addSbtPlugin("net.koofr" % "sbt-jaxws" % "0.2")
 
 Light configuration example (in `build.sbt`):
 

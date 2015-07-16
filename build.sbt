@@ -2,7 +2,7 @@ name := "sbt-jaxws"
 
 organization := "net.koofr"
 
-version := "0.1"
+version := "0.2"
 
 sbtPlugin := true
 
@@ -50,6 +50,11 @@ pomExtra := {
         <id>edofic</id>
         <name>Andraz Bajt</name>
         <url>https://github.com/edofic</url>
+      </developer>
+      <developer>
+        <id>bancek</id>
+        <name>Luka Zakrajšek</name>
+        <url>https://github.com/bancek</url>
       </developer>
     </developers>
   }
